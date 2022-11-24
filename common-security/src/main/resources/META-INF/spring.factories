@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.hmc.config.CustomAuthenticationFilter, \
+com.hmc.config.HttpSecurityConfiguration, \
+com.hmc.config.JwtToken, \
+com.hmc.config.WebConfiguration
