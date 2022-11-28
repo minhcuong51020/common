@@ -44,4 +44,14 @@ public final class SecurityUtils {
         return Optional.empty();
     }
 
+    public static String getTokenCurrent() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        if (Objects.nonNull(authentication) && authentication instanceof UserAuthentication) {
+            UserAuthentication userAuthentication = (UserAuthentication) authentication;
+            return userAuthentication.getToken();
+        }
+        return "";
+    }
+
 }

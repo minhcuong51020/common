@@ -8,6 +8,7 @@
         <module>common-util</module>
         <module>common-persistence</module>
         <module>common-security</module>
+        <module>common-client</module>
     </modules>
 
     <parent>

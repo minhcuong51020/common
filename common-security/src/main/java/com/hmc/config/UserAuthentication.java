@@ -13,12 +13,15 @@ public class UserAuthentication extends UsernamePasswordAuthenticationToken {
 
     private final boolean isRoot;
 
+    private final String token;
+
     public UserAuthentication(Object principal, Object credentials,
                               Collection<? extends GrantedAuthority> authorities,
-                              String userId, boolean isRoot) {
+                              String userId, boolean isRoot, String token) {
         super(principal, credentials, authorities);
         this.userId = userId;
         this.isRoot = isRoot;
+        this.token = token;
     }
 
     public String getUserId() {
@@ -27,5 +30,9 @@ public class UserAuthentication extends UsernamePasswordAuthenticationToken {
 
     public boolean isAdmin() {
         return this.isRoot;
+    }
+
+    public String getToken() {
+        return this.token;
     }
 }

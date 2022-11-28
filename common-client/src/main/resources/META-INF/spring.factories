@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.hmc.client.SocialClientFallback, \
+com.hmc.config.FeignClientConfiguration, \
+com.hmc.config.FeignClientInterceptor

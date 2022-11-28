@@ -40,7 +40,8 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
                     authentication.getCredentials(),
                     authorities,
                     userId,
-                    false
+                    false,
+                    token
             );
             SecurityContextHolder.getContext().setAuthentication(auth);
         } else {
