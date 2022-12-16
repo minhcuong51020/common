@@ -1,8 +1,6 @@
 package com.hmc.client;
 
-import com.hmc.common.dto.response.RedditDTO;
-import com.hmc.common.dto.response.RedditGroupDTO;
-import com.hmc.common.dto.response.Response;
+import com.hmc.common.dto.response.*;
 import com.hmc.config.FeignClientConfiguration;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -19,5 +17,17 @@ public interface SocialClient {
 
     @GetMapping("/api/reddit/user-owner")
     Response<RedditDTO> getRedditByOwner();
+
+    @GetMapping("/api/line/owner")
+    Response<LineDTO> getLineByOwner();
+
+    @GetMapping("/api/line/{id}/detail")
+    Response<LineDTO> getLineById(@PathVariable("id") String id);
+
+    @GetMapping("/api/reddit/{id}/detail")
+    Response<RedditDTO> getRedditById(@PathVariable("id") String id);
+
+    @GetMapping("/api/twitter/{id}/detail")
+    Response<TwitterDTO> getTwitterById(@PathVariable("id") String id);
 
 }

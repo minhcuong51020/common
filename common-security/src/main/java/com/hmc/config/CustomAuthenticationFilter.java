@@ -26,26 +26,26 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if(authorizationHeader == null || !authorizationHeader.startsWith(SecurityConstant.TOKEN_PREFIX)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-        String token = authorizationHeader.substring(SecurityConstant.TOKEN_PREFIX.length());
-        String username = jwtToken.getSubject(token);
-        if(jwtToken.isTokenValid(username, token)) {
-            String userId = jwtToken.getUserIdFromToken(token);
-            List<GrantedAuthority> authorities = jwtToken.getAuthorities(token);
-            Authentication authentication = jwtToken.getAuthentication(username, authorities, request);
-            UserAuthentication auth = new UserAuthentication(
-                    authentication.getPrincipal(),
-                    authentication.getCredentials(),
-                    authorities,
-                    userId,
-                    false,
-                    token
-            );
-            SecurityContextHolder.getContext().setAuthentication(auth);
+            SecurityContextHolder.createEmptyContext();
         } else {
-            SecurityContextHolder.clearContext();
+            String token = authorizationHeader.substring(SecurityConstant.TOKEN_PREFIX.length());
+            String username = jwtToken.getSubject(token);
+            if(jwtToken.isTokenValid(username, token)) {
+                String userId = jwtToken.getUserIdFromToken(token);
+                List<GrantedAuthority> authorities = jwtToken.getAuthorities(token);
+                Authentication authentication = jwtToken.getAuthentication(username, authorities, request);
+                UserAuthentication auth = new UserAuthentication(
+                        authentication.getPrincipal(),
+                        authentication.getCredentials(),
+                        authorities,
+                        userId,
+                        false,
+                        token
+                );
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            } else {
+                SecurityContextHolder.createEmptyContext();
+            }
         }
         filterChain.doFilter(request, response);
     }

@@ -1,8 +1,6 @@
 package com.hmc.client;
 
-import com.hmc.common.dto.response.RedditDTO;
-import com.hmc.common.dto.response.RedditGroupDTO;
-import com.hmc.common.dto.response.Response;
+import com.hmc.common.dto.response.*;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +26,26 @@ public class SocialClientFallback implements FallbackFactory<SocialClient> {
 
         @Override
         public Response<RedditDTO> getRedditByOwner() {
+            return Response.fail(new RuntimeException());
+        }
+
+        @Override
+        public Response<LineDTO> getLineByOwner() {
+            return Response.fail(new RuntimeException());
+        }
+
+        @Override
+        public Response<LineDTO> getLineById(String id) {
+            return Response.fail(new RuntimeException());
+        }
+
+        @Override
+        public Response<RedditDTO> getRedditById(String id) {
+            return Response.fail(new RuntimeException());
+        }
+
+        @Override
+        public Response<TwitterDTO> getTwitterById(String id) {
             return Response.fail(new RuntimeException());
         }
     }
